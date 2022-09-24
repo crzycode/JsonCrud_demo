@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonCrud_demo", "JsonCrud_demo\JsonCrud_demo.csproj", "{3EE5542A-70A3-44AE-AAD3-7A4F61F3A5E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EE5542A-70A3-44AE-AAD3-7A4F61F3A5E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EE5542A-70A3-44AE-AAD3-7A4F61F3A5E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EE5542A-70A3-44AE-AAD3-7A4F61F3A5E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EE5542A-70A3-44AE-AAD3-7A4F61F3A5E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CBC2030F-8BA2-4A21-A9A4-4D25D2FB1EEA}
+	EndGlobalSection
+EndGlobal
