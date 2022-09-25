@@ -7,7 +7,7 @@ using System.Collections;
 using System.Text.Json;
 using System.IO;
 using JsonCrud_demo.Models.CrudClass;
-using JsonCrud_demo.Models.Functions;
+
 
 namespace JsonCrud_demo.Controllers
 {
@@ -18,19 +18,16 @@ namespace JsonCrud_demo.Controllers
 
     public class HomeController : ControllerBase
     {
-        private int i;
-        private string Filename = @"D:\Json\Data.json";
-
-        Func_method fun = new Func_method();
-        PostClass pos = new PostClass();
-        GetClass get = new GetClass();
+        JsonData data = new JsonData();
         
 
         [HttpPost]
         public dynamic  Adduser(User u){
-
-            pos.Postdata(u,Filename);
-            return "successs";
+            
+            u.U_id = data.JKey();
+            data.JPost(u);
+            
+            return "h";
         }
       
 
@@ -39,7 +36,8 @@ namespace JsonCrud_demo.Controllers
         {
 
 
-            return get.get(Filename);
+
+            return data.JGet();
 
         }
        
