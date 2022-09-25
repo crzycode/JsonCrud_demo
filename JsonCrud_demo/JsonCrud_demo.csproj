@@ -12,6 +12,7 @@
     <PackageReference Include="RestSharp" Version="108.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
+    <PackageReference Include="Uno.UI" Version="4.5.9" />
   </ItemGroup>
 
 </Project>

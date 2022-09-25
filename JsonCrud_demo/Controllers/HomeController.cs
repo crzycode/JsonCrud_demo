@@ -6,10 +6,12 @@ using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Text.Json;
 using System.IO;
+using JsonCrud_demo.Models.CrudClass;
+using JsonCrud_demo.Models.Functions;
 
 namespace JsonCrud_demo.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
 
@@ -20,34 +22,14 @@ namespace JsonCrud_demo.Controllers
         private string Filename = @"D:\Json\Data.json";
 
         Func_method fun = new Func_method();
+        PostClass pos = new PostClass();
+        GetClass get = new GetClass();
         
 
         [HttpPost]
-        public dynamic  PostData(User u){
-            i++;
+        public dynamic  Adduser(User u){
 
-            string lineContents = fun.ReadSpecificLine(2);
-            JObject json = JObject.FromObject(u);
-            var jsonString = JsonConvert.SerializeObject(u, Formatting.Indented);
-             int iInsertAtLineNumber = 1+1;
-            object strTextToInsert = ","+jsonString;
-            ArrayList lines = new ArrayList();
-            StreamReader rdr = new StreamReader(Filename);
-            string line;
-            while ((line = rdr.ReadLine()) != null)
-                lines.Add(line);
-            rdr.Close();
-            if (lines.Count > iInsertAtLineNumber)
-                lines.Insert(iInsertAtLineNumber,
-                   strTextToInsert);
-            else
-                lines.Add(strTextToInsert);
-            StreamWriter wrtr = new StreamWriter(Filename);
-            foreach (object strNewLine in lines)
-                wrtr.WriteLine(strNewLine);
-            
-            wrtr.Close(); 
-
+            pos.Postdata(u,Filename);
             return "successs";
         }
       
@@ -55,24 +37,9 @@ namespace JsonCrud_demo.Controllers
         [HttpGet]
         public dynamic getdata()
         {
-            string lineContents = fun.ReadSpecificLine(1);
-            dynamic data = System.IO.File.ReadAllText(Filename);
 
-            var json = JsonConvert.DeserializeObject<List<User>>(data);
-           
-            if(json != null)
-            {
-                for (int i = 0; i < json.Count; i++)
-                {
-                    User u = json[i];
-                    
-                }
-                
-            }
 
-            
-           
-            return json;
+            return get.get(Filename);
 
         }
        
