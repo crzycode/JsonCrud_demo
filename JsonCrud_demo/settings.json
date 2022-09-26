@@ -1,0 +1,18 @@
+[
+  {
+    "U_id": 2,
+    "U_Name": "string",
+    "U_Email": "string",
+    "U_Age": 0,
+    "U_Salary": 0,
+    "U_Disignation": "string"
+  },
+  {
+    "U_id": 1,
+    "U_Name": "jghg",
+    "U_Email": "string",
+    "U_Age": 0,
+    "U_Salary": 0,
+    "U_Disignation": "string"
+  }
+]

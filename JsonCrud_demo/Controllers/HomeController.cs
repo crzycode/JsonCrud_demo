@@ -18,27 +18,37 @@ namespace JsonCrud_demo.Controllers
 
     public class HomeController : ControllerBase
     {
-        JsonData data = new JsonData();
+        JsonData js = new JsonData();
         
 
         [HttpPost]
         public dynamic  Adduser(User u){
-            
-            u.U_id = data.JKey();
-            data.JPost(u);
-            
-            return "h";
+             u.U_id = js.JKey();
+            var data = js.JPost(u);
+            return data;
+        
         }
       
 
         [HttpGet]
         public dynamic getdata()
         {
+            var data = js.JGet();
+            return data;
 
+        }
+        [HttpGet("{id}")]
+        public dynamic finddata(string id)
+        {
+            var data = js.JFindById(id);
+            return data;
+        }
+        [HttpPut("{id}")]
+        public dynamic updatedata(User u,string id)
+        {
 
-
-            return data.JGet();
-
+            var data = js.JUpdate(u,id);
+            return data;
         }
        
     }

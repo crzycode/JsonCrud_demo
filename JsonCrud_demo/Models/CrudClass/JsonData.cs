@@ -13,20 +13,21 @@ namespace JsonCrud_demo.Models.CrudClass
         {
             if (!System.IO.File.Exists(DBStore))
             {
-                System.IO.File.Create(DBStore);
+                System.IO.File.Create(DBStore).Dispose();   
             }
             if (!System.IO.File.Exists(Jkey))
             {
-                System.IO.File.Create(Jkey);
+                System.IO.File.Create(Jkey).Dispose();
             }
-            var linesList = File.ReadAllLines(DBStore).ToList();
-            if(linesList.Count <= 0)
+            var line = File.ReadAllLines(Jkey).ToList();
+            if (line.Count <= 0)
             {
                 System.IO.File.WriteAllText(DBStore,"[\n]");
             }
         }
         public dynamic JPost(object u)
         {
+            
             string lineContents = ReadSpecificLine(2);
             JObject json = JObject.FromObject(u);
             var jsonString = JsonConvert.SerializeObject(u, Formatting.Indented);
@@ -66,8 +67,8 @@ namespace JsonCrud_demo.Models.CrudClass
         }
        public dynamic JKey()
         {
-            var linesList = File.ReadAllLines(Jkey).ToList();
-            if (linesList.Count <= 0)
+            var line = File.ReadAllLines(Jkey).ToList();
+            if (line.Count <= 0)
             {
                 System.IO.File.WriteAllText(Jkey, counterval);
             }
@@ -100,6 +101,98 @@ namespace JsonCrud_demo.Models.CrudClass
                 }
             }
             return "success";
+        }
+        public dynamic JFindById(string id)
+        {
+            dynamic data = System.IO.File.ReadAllText(DBStore);
+            ReadSpecificLine(1);
+            var json = JsonConvert.DeserializeObject<List<User>>(data);
+            int numericValue;
+            bool isNumber = int.TryParse(id, out numericValue);
+            if (isNumber == true)
+            {
+                if (json != null)
+                {
+                    for (int i = 0; i < json.Count; i++)
+                    {
+                        if (json[i].U_id == numericValue)
+                        {
+                            return json[i];
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (json != null)
+                {
+                    for (int i = 0; i < json.Count; i++)
+                    {
+                        if (json[i].U_Name == id)
+                        {
+
+                            return json[i];
+
+
+                        }
+
+                    }
+                }
+            }
+            return "Id Does not Exist";
+        }
+        public dynamic JUpdate(User u, string id)
+        {
+            dynamic data = System.IO.File.ReadAllText(DBStore);
+            ReadSpecificLine(1);
+            var json = JsonConvert.DeserializeObject<List<User>>(data);
+
+
+            int numericValue;
+            bool isNumber = int.TryParse(id, out numericValue);
+            if (isNumber == true)
+            {
+                if (json != null)
+                {
+                    for (int i = 0; i < json.Count; i++)
+                    {
+                        if (json[i].U_id == numericValue)
+                        {
+                            json[i].U_Name = u.U_Name;
+                            json[i].U_Email = u.U_Email;
+                            json[i].U_Age = u.U_Age;
+                            json[i].U_Salary = u.U_Salary;
+                            json[i].U_Disignation = u.U_Disignation;
+                            string output = Newtonsoft.Json.JsonConvert.SerializeObject(json, Newtonsoft.Json.Formatting.Indented);
+                            File.WriteAllText(DBStore, output);
+                            return json[i];
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (json != null)
+                {
+                    for (int i = 0; i < json.Count; i++)
+                    {
+                        if (json[i].U_Name == id)
+                        {
+                            json[i].U_Name = u.U_Name;
+                            json[i].U_Email = u.U_Email;
+                            json[i].U_Age = u.U_Age;
+                            json[i].U_Salary = u.U_Salary;
+                            json[i].U_Disignation = u.U_Disignation;
+                            string output = Newtonsoft.Json.JsonConvert.SerializeObject(json, Newtonsoft.Json.Formatting.Indented);
+                            File.WriteAllText(DBStore, output);
+                            return json[i];
+                        }
+
+                    }
+                }
+            }
+            return "hey";
         }
     }
 }
